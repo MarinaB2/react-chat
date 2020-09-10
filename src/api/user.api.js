@@ -1,7 +1,8 @@
 import { handelResponse } from "./api";
 
-const API_Reagister_URL = '';
-const API_Login_URL = '';
+const API_Reagister_URL = 'http://localhost:5000';
+const API_Login_URL = 'http://localhost:5000/';
+
 
 const createFetchOptions = (method, body) => ({
     method: 'POST',
