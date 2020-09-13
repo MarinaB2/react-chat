@@ -63,15 +63,15 @@ function App() {
               )
           } />
 
-          <Route exact
-            path="/chatR" render={props =>
+          <Route path="/chatR" component={ChatRoom}/>
+          
+          <Route path="/chat" render={props =>
               isAuthenticated ? (
-                <ChatRoom {...props} setAuth={setAuth} />
+                <ChatForm {...props} setAuth={setAuth} />
               ) : (
                   <Redirect to="/login" />
                 )
-            } />
-          <Route path="/chat" component={ChatForm} />
+            } /> 
           <Route path="*" component={NotFound} />
         </Switch>
       </div>

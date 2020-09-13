@@ -7,8 +7,6 @@ import Input from '../formComponents/Input';
 import Messages from '../formComponents/Messages';
 import TextContainer from '../formComponents/TextContainer';
 import { toast } from "react-toastify";
-
-
 import '../../css/chatCss.scss';
 
 let socket;
@@ -51,14 +49,11 @@ const ChatForm = ({ location }, { setAuth }) => {
         setUsername(username);
         setRoom(room);
 
-        console.log(socket);
         socket.emit('login', { username, room }, (error) => {
             if (error) {
                 alert(error);
             }
         });
-
-
     }, [endPoint, username, location.search]);
 
     useEffect(() => {
@@ -75,13 +70,11 @@ const ChatForm = ({ location }, { setAuth }) => {
         event.preventDefault();
 
         if (message) {
-
             socket.emit('sendMessage', message, () => setMessage('')); //clear input filed when the message is sent 
         }
-
     }
 
-    const logout = async e => {
+    const logout = e => {
         e.preventDefault();
         try {
             localStorage.removeItem("token");
@@ -94,16 +87,15 @@ const ChatForm = ({ location }, { setAuth }) => {
 
     return (
         <div className="outerContainer">
-
             <h2>Welcome {username}</h2>
-            <button onClick={e => logout(e)} className="btn btn-primary">
-                Logout
-      </button>
             <div className="container">
                 <InfoBar room={room} />
                 <Messages messages={messages} username={username} />
                 <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
             </div>
+            <button onClick={e => logout(e)} className="btn btn-primary">
+                Logout
+            </button>
             <TextContainer users={users} />
         </div>
     )
