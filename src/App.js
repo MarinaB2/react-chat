@@ -63,8 +63,14 @@ function App() {
               )
           } />
 
-          <Route path="/chatR" component={ChatRoom}/>
-          
+          <Route path="/chatR" render={props =>
+              isAuthenticated ? (
+                <ChatRoom {...props} setAuth={setAuth} />
+              ) : (
+                  <Redirect to="/login" />
+                )
+            }/>
+
           <Route path="/chat" render={props =>
               isAuthenticated ? (
                 <ChatForm {...props} setAuth={setAuth} />

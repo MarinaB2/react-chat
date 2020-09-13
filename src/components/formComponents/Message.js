@@ -1,8 +1,7 @@
 import React from 'react';
-
 import '../../css/chatCss.scss';
-
 import ReactEmoji from 'react-emoji';
+import image from '../../images/avatar.png'
 
 const Message = ({ message: { text, user }, username }) => {
   let isSentByCurrentUser = false;
@@ -16,11 +15,15 @@ const Message = ({ message: { text, user }, username }) => {
   return (
     isSentByCurrentUser
       ? (
+        <div>
+      
         <div className="messageContainer justifyEnd">
+        <img src={image} alt="Avatar" class="avatar"/>
           <p className="sentText pr-10">{trimmedName}</p>
           <div className="messageBox backgroundBlue">
              <p className="messageText colorWhite">{ReactEmoji.emojify(text)}</p> 
           </div>
+        </div>
         </div>
         )
         : (

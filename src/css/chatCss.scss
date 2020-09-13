@@ -91,10 +91,6 @@
   margin-right: 5%;
 }
 
-.onlineIcon {
-  margin-right: 5%;
-}
-
 //........
 
 .form {
@@ -167,6 +163,12 @@ input:focus, textarea:focus, select:focus{
   font-family: Helvetica;
   color: #828282;
   letter-spacing: 0.3px;
+}
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 .pl-10 {
