@@ -6,37 +6,60 @@ import InfoBar from '../formComponents/InfoBar';
 import Input from '../formComponents/Input';
 import Messages from '../formComponents/Messages';
 import TextContainer from '../formComponents/TextContainer';
+import { toast } from "react-toastify";
+
+
+import '../../css/chatCss.scss';
 
 let socket;
 
-const ChatForm = ({ location }) => {
+const ChatForm = ({ location }, { setAuth }) => {
     const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
     const [room, setRoom] = useState('');
     const [users, setUsers] = useState('');
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
-    const endPoint = 'http://localhost:5000/';
+     const endPoint = 'http://localhost:5000/';
+
+     const getUsername = async () => {
+        try {
+            const res = await fetch("http://localhost:5000/chat", {
+                method: "POST",
+                headers: { jwt_token: localStorage.token }
+            });
+
+            const parseData = await res.json();
+            setUsername(parseData.username);
+            
+        } catch (err) {
+            console.error(err.message);
+        }
+    };
+    useEffect(() => {
+        getUsername();
+        
+    }, []);
 
     useEffect(() => {
-        const { username, password, room } = queryString.parse(location.search);
+      
+        const { room } = queryString.parse(location.search);
+
+       socket = io(endPoint);
 
 
-        socket = io(endPoint);
-
-        setUsername(username);
-        setPassword(password);
+       setUsername(username);
         setRoom(room);
 
         console.log(socket);
-        socket.emit('register', { username, password, room }, (error) => {
+        socket.emit('login', { username, room }, (error) => {
             if (error) {
                 alert(error);
             }
         });
+        
 
-    }, [endPoint, location.search]);
+    }, [endPoint, username, location.search]);
 
     useEffect(() => {
         socket.on('message', message => {
@@ -57,10 +80,25 @@ const ChatForm = ({ location }) => {
         }
 
     }
-    console.log('user and users from chatForm', username, users);
-    console.log(message, messages);
+
+    const logout = async e => {
+        e.preventDefault();
+        try {
+            localStorage.removeItem("token");
+            setAuth(false);
+            toast.success("Logout successfully");
+        } catch (err) {
+            console.error(err.message);
+        }
+    };
+
     return (
         <div className="outerContainer">
+
+            <h2>Welcome {username}</h2>
+            <button onClick={e => logout(e)} className="btn btn-primary">
+                Logout
+      </button>
             <div className="container">
                 <InfoBar room={room} />
                 <Messages messages={messages} username={username} />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import './Message.css';
+import '../../css/chatCss.scss';
 
 import ReactEmoji from 'react-emoji';
 

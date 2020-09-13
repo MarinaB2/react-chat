@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #1A1A1D;
+    height: 800px;
+    background-color: #e2e2ee;
   }
   
   .container {
@@ -35,19 +35,15 @@
 
   //.....
 
-  @import '../../styles/_colors';
-
-$input-border-color: darken($accent-color, 6.5%);
-$input-text-color: darken(adjust-hue($primary-color, -155), 23.33);
-$chat-form-top-border: darken($accent-color, 12.16);
+// $input-border-color: darken($accent-color, 6.5%);
+// $input-text-color: darken(adjust-hue($primary-color, -155), 23.33);
+// $chat-form-top-border: darken($accent-color, 12.16);
 
 #chat-form {
   display: flex;
   align-items: center;
   grid-area: chat-form;
-  background: $accent-color;
   border-radius: 0 0 10px 0;
-  border-top: 1px solid $chat-form-top-border;
   padding-left: 42px;
   padding-right: 22px;
 
@@ -55,9 +51,7 @@ $chat-form-top-border: darken($accent-color, 12.16);
     flex: 1 0 0;
     outline: none;
     padding: 15px;
-    border: 2px solid $input-border-color;
     border-right: none;
-    color: $input-text-color;
     border-radius: 6px 0 0 6px;
     font-size: 1.4rem;
     margin-left: 15px;
@@ -72,3 +66,173 @@ $chat-form-top-border: darken($accent-color, 12.16);
 
 //.....
 
+.infoBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1988b4;
+  border-radius: 4px 4px 0 0;
+  height: 60px;
+  width: 100%;
+}
+
+.leftInnerContainer {
+  flex: 0.5;
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+  color: white;
+}
+
+.rightInnerContainer {
+  display: flex;
+  flex: 0.5;
+  justify-content: flex-end;
+  margin-right: 5%;
+}
+
+.onlineIcon {
+  margin-right: 5%;
+}
+
+//........
+
+.form {
+  display: flex;
+  border-top: 2px solid #D3D3D3;
+}
+
+.input {
+  border: none;
+  border-radius: 0;
+  padding: 5%;
+  width: 80%;
+  font-size: 1.2em;
+}
+
+input:focus, textarea:focus, select:focus{
+  outline: none;
+}
+
+.sendButton {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #1988b4;
+  padding: 20px;
+  display: inline-block;
+  border: none;
+  width: 20%;
+}
+
+//......
+
+.messages {
+  padding: 5% 0;
+  overflow: auto;
+  flex: auto;
+}
+
+.messageBox {
+  background: #F3F3F3;
+  border-radius: 20px;
+  padding: 5px 20px;
+  color: white;
+  display: inline-block;
+  max-width: 80%;
+}
+
+.messageText {
+  width: 100%;
+  letter-spacing: 0;
+  float: left;
+  font-size: 1.1em;
+  word-wrap: break-word;
+}
+
+.messageText img {
+  vertical-align: middle;
+}
+
+.messageContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 5%;
+  margin-top: 3px;
+}
+
+.sentText {
+  display: flex;
+  align-items: center;
+  font-family: Helvetica;
+  color: #828282;
+  letter-spacing: 0.3px;
+}
+
+.pl-10 {
+  padding-left: 10px;
+}
+
+.pr-10 {
+  padding-right: 10px;
+}
+
+.justifyStart {
+  justify-content: flex-start;
+}
+
+.justifyEnd {
+  justify-content: flex-end;
+}
+
+.colorWhite {
+  color: white;
+}
+
+.colorDark {
+  color: #353535;
+}
+
+.backgroundBlue {
+  background: #1988b4;
+}
+
+.backgroundLight {
+  background: #F3F3F3;
+}
+
+//...........
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+  color: white;
+  height: 60%;
+  justify-content: space-between;
+}
+
+.activeContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50%;
+}
+
+.activeItem {
+  display: flex;
+  align-items: center;
+}
+
+.activeContainer img {
+  padding-left: 10px;
+}
+
+.textContainer h1 {
+  margin-bottom: 0px;
+}
+
+@media (min-width: 320px) and (max-width: 1200px) {
+  .textContainer {
+    display: none;
+  }
+}

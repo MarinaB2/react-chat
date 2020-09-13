@@ -1,39 +1,53 @@
 import React, { useState } from 'react';
 import { registerUser } from '../../api/user.api';
 import { Link } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 
-const RegisterForm = props => {
+const RegisterForm = ({ setAuth }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [room, setRoom] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [registerError, setRegisterError] = useState('');
+    // const [isLoading, setIsLoading] = useState(false);
+    // const [registerError, setRegisterError] = useState('');
 
-    const onRegisterCliked = async event => {
 
-        setIsLoading(true);
-        let result;
-
+    const onSubmitForm = async e => {
+        e.preventDefault();
         try {
-            const { status } = await registerUser(username, password, room);
-            result = status === 201;
+            const body = { password, username };
+            const response = await fetch(
+                "http://localhost:5000/authentication/register",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify(body)
+                }
+            );
+            const parseRes = await response.json();
 
-        } catch (e) {
-            setRegisterError(e.message || e);
-        } finally {
-            setIsLoading(false);
-            props.registerComplete(result);
+            if (parseRes.jwtToken) {
+                localStorage.setItem("token", parseRes.jwtToken);
+                setAuth(true);
+                toast.success("Register Successfully");
+            } else {
+                setAuth(false);
+                toast.error(parseRes);
+            }
+        } catch (err) {
+            console.error(err.message);
         }
     };
 
     const onUserNameChanged = ev => setUsername(ev.target.value.trim());
     const onUserPasswordChanged = ev => setPassword(ev.target.value.trim());
-    const onRoomChanged = ev => setRoom(ev.target.value.trim());
+
 
     return (
-        <form>
+        <form onSubmit={onSubmitForm}>
+             <h1>Register new account : </h1>
             <div>
                 <label>Username: </label>
                 <input type="text" placeholder="Enter username" onChange={onUserNameChanged} />
@@ -43,16 +57,9 @@ const RegisterForm = props => {
                 <input type="password" placeholder="Enter password" onChange={onUserPasswordChanged} />
             </div>
             <div>
-                <label>Room: </label>
-                <input type="text" placeholder="Enter password" onChange={onRoomChanged} />
+                <button >Register</button>
             </div>
-            <div>
-                <Link onClick={e => (!username || !room) ? e.preventDefault() : null} to={`/chat?name=${username}&room=${room}`}>
-                <button type="submit">Register</button>
-                </Link>
-            </div>
-            {isLoading && <div>Registering user...</div>}
-            {registerError && <div>{registerError}</div>}
+            <Link to="/login">Already registred? Login here</Link>
         </form>
     )
 

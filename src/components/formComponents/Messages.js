@@ -3,8 +3,7 @@ import React from 'react';
 
 import ScrollToBottom from 'react-scroll-to-bottom';
 
-
-// import './Messages.css';
+import '../../css/chatCss.scss';
 import Message from './Message';
 
 const Messages = ({ messages, username }) => (

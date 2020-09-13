@@ -1,6 +1,6 @@
 import { handelResponse } from "./api";
 
-const API_Reagister_URL = 'http://localhost:5000';
+const API_Reagister_URL = 'http://localhost:5000/authentication/register';
 const API_Login_URL = 'http://localhost:5000/';
 
 
