@@ -20,9 +20,9 @@ const ChatForm = ({ location }, { setAuth }) => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
-     const endPoint = 'http://localhost:5000/';
+    const endPoint = 'http://localhost:5000/';
 
-     const getUsername = async () => {
+    const getUsername = async () => {
         try {
             const res = await fetch("http://localhost:5000/chat", {
                 method: "POST",
@@ -31,24 +31,24 @@ const ChatForm = ({ location }, { setAuth }) => {
 
             const parseData = await res.json();
             setUsername(parseData.username);
-            
+
         } catch (err) {
             console.error(err.message);
         }
     };
     useEffect(() => {
         getUsername();
-        
+
     }, []);
 
     useEffect(() => {
-      
+
         const { room } = queryString.parse(location.search);
 
-       socket = io(endPoint);
+        socket = io(endPoint);
 
 
-       setUsername(username);
+        setUsername(username);
         setRoom(room);
 
         console.log(socket);
@@ -57,7 +57,7 @@ const ChatForm = ({ location }, { setAuth }) => {
                 alert(error);
             }
         });
-        
+
 
     }, [endPoint, username, location.search]);
 

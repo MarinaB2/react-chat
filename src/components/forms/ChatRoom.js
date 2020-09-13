@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 import '../../css/chatCss.scss';
 
-
-
 const ChatRoom = () => {
     const [username, setUsername] = useState('');
     const [room, setRoom] = useState('');
@@ -23,8 +21,6 @@ const ChatRoom = () => {
             console.error(err.message);
         }
     };
-
-
     useEffect(() => {
         getUsername();
     }, []);

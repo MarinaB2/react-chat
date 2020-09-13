@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
-import { registerUser } from '../../api/user.api';
 import { Link } from 'react-router-dom';
 import { toast } from "react-toastify";
 
 
 const RegisterForm = ({ setAuth }) => {
-
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [registerError, setRegisterError] = useState('');
-
 
     const onSubmitForm = async e => {
         e.preventDefault();
@@ -44,10 +39,9 @@ const RegisterForm = ({ setAuth }) => {
     const onUserNameChanged = ev => setUsername(ev.target.value.trim());
     const onUserPasswordChanged = ev => setPassword(ev.target.value.trim());
 
-
     return (
         <form onSubmit={onSubmitForm}>
-             <h1>Register new account : </h1>
+            <h1>Register new account : </h1>
             <div>
                 <label>Username: </label>
                 <input type="text" placeholder="Enter username" onChange={onUserNameChanged} />
@@ -59,6 +53,7 @@ const RegisterForm = ({ setAuth }) => {
             <div>
                 <button >Register</button>
             </div>
+            <br></br>
             <Link to="/login">Already registred? Login here</Link>
         </form>
     )
